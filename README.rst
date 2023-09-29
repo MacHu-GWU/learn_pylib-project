@@ -50,22 +50,3 @@
 
 Welcome to ``learn_pylib`` Documentation
 ==============================================================================
-Documentation for ``learn_pylib``.
-
-
-.. _install:
-
-Install
-------------------------------------------------------------------------------
-
-``learn_pylib`` is released on PyPI, so all you need is to:
-
-.. code-block:: console
-
-    $ pip install learn-pylib
-
-To upgrade to latest version:
-
-.. code-block:: console
-
-    $ pip install --upgrade learn-pylib
