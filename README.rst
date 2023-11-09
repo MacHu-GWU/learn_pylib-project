@@ -1,6 +1,6 @@
 
 .. image:: https://readthedocs.org/projects/learn-pylib/badge/?version=latest
-    :target: https://learn-pylib.readthedocs.io/en/latest/
+    :target: https://learn-pylib.readthedocs.io/
     :alt: Documentation Status
 
 .. image:: https://github.com/MacHu-GWU/learn_pylib-project/workflows/CI/badge.svg
@@ -27,10 +27,7 @@
 ------
 
 .. image:: https://img.shields.io/badge/Link-Document-blue.svg
-    :target: https://learn-pylib.readthedocs.io/en/latest/
-
-.. image:: https://img.shields.io/badge/Link-API-blue.svg
-    :target: https://learn-pylib.readthedocs.io/en/latest/py-modindex.html
+    :target: https://learn-pylib.readthedocs.io/
 
 .. image:: https://img.shields.io/badge/Link-GitHub-blue.svg
     :target: https://github.com/MacHu-GWU/learn_pylib-project

@@ -41,6 +41,57 @@ Basic Usage
    :language: python
    :linenos:
 
+.. code-block:: bash
+
+    $ python basic_usage.py -h
+    NAME
+        basic_usage.py - this is main function
+
+    SYNOPSIS
+        basic_usage.py NAME <flags>
+
+    DESCRIPTION
+        this is description
+
+        - sentence 1
+        - sentence 2
+        - sentence 3
+
+    POSITIONAL ARGUMENTS
+        NAME
+
+    FLAGS
+        -i, --is_kid=IS_KID
+            Type: typing.Union[bool, NoneType]
+            Default: False
+        -a, --age=AGE
+            Type: typing.Union[int, NoneType]
+            Default: 18
+
+    NOTES
+        You can also use flags syntax for POSITIONAL ARGUMENTS
+
+.. code-block:: bash
+
+    $ python basic_usage.py --name alice
+    name = alice
+    is_kid = False
+    age = 18
+
+.. code-block:: bash
+
+    $ python basic_usage.py --name alice --is_kid
+    name = alice
+    is_kid = True
+    age = 18
+
+.. code-block:: bash
+
+    $ python basic_usage.py --name alice --age 30
+    name = alice
+    is_kid = False
+    age = 30
+
 
 Subcommand example 1
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -48,9 +99,100 @@ Subcommand example 1
    :language: python
    :linenos:
 
+.. code-block:: bash
+
+    $ python subcommand_example1.py -h
+    NAME
+        subcommand_example1.py - Top level command document.
+
+    SYNOPSIS
+        subcommand_example1.py COMMAND | <flags>
+
+    DESCRIPTION
+        Top level command document.
+
+    FLAGS
+        -v, --version=VERSION
+            Type: typing.Union[bool, NoneType]
+            Default: False
+
+    COMMANDS
+        COMMAND is one of the following:
+
+         config
+           "config" subcommand document
+
+         run
+           "run" subcommand document
+
+.. code-block:: bash
+
+    $ python subcommand_example1.py -v
+    0.0.1
+
+.. code-block:: bash
+
+    $ python subcommand_example1.py config
+    app config
+
 
 Subcommand example 2
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 .. literalinclude:: ./subcommand_example2.py
    :language: python
    :linenos:
+
+
+.. code-block:: bash
+
+    $ python subcommand_example2.py -h
+    NAME
+        subcommand_example2.py - AWS CLI class doc string
+
+    SYNOPSIS
+        subcommand_example2.py GROUP | <flags>
+
+    DESCRIPTION
+        AWS CLI class doc string
+
+    FLAGS
+        -v, --version=VERSION
+            Type: typing.Union[bool, NoneType]
+            Default: False
+
+    GROUPS
+        GROUP is one of the following:
+
+         ec2
+           AWS EC2 sub command
+
+         s3
+           AWS S3 sub command
+
+.. code-block:: bash
+
+    $ python subcommand_example2.py -v
+    0.0.1
+
+.. code-block:: bash
+
+    $ python subcommand_example2.py s3
+    NAME
+        subcommand_example2.py s3 - AWS S3 sub command
+
+    SYNOPSIS
+        subcommand_example2.py s3 COMMAND
+
+    DESCRIPTION
+        AWS S3 sub command
+
+    COMMANDS
+        COMMAND is one of the following:
+
+         ls
+           List s3 buckets
+
+.. code-block:: bash
+
+    $ python subcommand_example2.py s3 ls
+    run: aws s3 ls

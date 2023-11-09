@@ -1,61 +1,38 @@
 # -*- coding: utf-8 -*-
 
 """
+Simple sub command example.
 
+- Class = top level command
+- Method = sub command
 """
 
 import typing as T
 import fire
 
 
-class S3:
+class App:
     """
-    AWS S3 sub command
+    Top level command document.
     """
-
-    def ls(self):
-        """
-        List s3 buckets
-        """
-        print("run: aws s3 ls")
-
-
-class EC2:
-    """
-    AWS EC2 sub command
-    """
-
-    def list_instances(self):
-        """
-        List ec2 instances
-        """
-        print("run: aws ec2 list-instances")
-
-    def list_vpcs(self):
-        """
-        List ec2 vpc
-        """
-        print("run: aws ec2 list-vpcs")
-
-
-class AWS:
-    """
-    AWS CLI class doc string
-    """
-
-    def __init__(self):
-        self.s3 = S3()
-        self.ec2 = EC2()
-
     def __call__(self, version: T.Optional[bool] = False):
-        """
-        AWS CLI
-        """
         if version:
             print("0.0.1")
         else:
-            print("run: aws")
+            print("app")
+
+    def config(self):
+        """
+        "config" subcommand document
+        """
+        print("app config")
+
+    def run(self):
+        """
+        "run" subcommand document
+        """
+        print("app run")
 
 
 if __name__ == "__main__":
-    fire.Fire(AWS())
+    fire.Fire(App())
