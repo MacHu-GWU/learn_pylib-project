@@ -13,6 +13,9 @@ class Counter:
 counter = Counter()
 start = datetime.now()
 
+class TaskError(Exception):
+    pass
+
 
 @retry(
     wait=wait_exponential(multiplier=1, exp_base=2, min=0, max=30),
@@ -25,11 +28,12 @@ def run_task():
     print(f"------ {counter.i} th, elapsed {elapsed} seconds ------")
     if random.randint(1, 100) <= 100:
         print("❌ Failed")
-        raise Exception("random error")
+        raise TaskError("random error")
     else:
         print("✅ Succeeded")
 
 try:
     run_task()
-except RetryError:
-    print("raise RetryError, no more retry")
+except RetryError as e:
+    print(f"raise RetryError, no more retry")
+    print(f"original error: {e.last_attempt.result()!r}")
