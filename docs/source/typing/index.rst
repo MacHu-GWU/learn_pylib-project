@@ -36,6 +36,10 @@ Generics 泛型
    :language: python
    :linenos:
 
+.. literalinclude:: fan_xing_7.py
+   :language: python
+   :linenos:
+
 .. literalinclude:: generic_by_parameter.py
    :language: python
    :linenos:
