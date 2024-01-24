@@ -43,11 +43,16 @@ def write_data():
 def read_data():
     with Path("users.avro").open("rb") as f:
         reader = DataFileReader(f, DatumReader())
+
+        print("--- Schema ---")
+        print(json.dumps(json.loads(reader.schema), indent=4))
+
+        print("--- Data ---")
         for user in reader:
             print(user)
         reader.close()
 
 
-# save_schema()
-# write_data()
-# read_data()
+save_schema()
+write_data()
+read_data()
