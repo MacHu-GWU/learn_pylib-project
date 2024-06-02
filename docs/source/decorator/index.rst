@@ -1,4 +1,4 @@
-decorator - a data serialization system
+decorator - create decorator made easy
 ==============================================================================
 - PyPI: https://pypi.org/project/decorator/
 - GitHub: https://github.com/micheles/decorator
