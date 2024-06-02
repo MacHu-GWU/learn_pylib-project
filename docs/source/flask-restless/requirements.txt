@@ -1,0 +1,10 @@
+sqlalchemy>=2.0.30,<3.0.0
+# flask>=2.3.3,<3.0.0
+# Werkzeug>=2.3.8,<3.0.0
+flask>=3.0.0,<4.0.0
+Werkzeug>=3.0.0,<4.0.0
+python-dateutil>2.8.2,<3.0.0
+MarkupSafe>=2.0.0,<3.0.0
+Flask-SQLAlchemy>=3.1.1,<4.0.0
+itsdangerous>=2.0.0,<3.0.0
+Flask-Restless-NG>=3.2.3,<3.3.0

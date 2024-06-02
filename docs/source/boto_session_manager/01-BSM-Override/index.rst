@@ -10,7 +10,7 @@ Keywords: boto session manager, bsm, ses
         /app_code.py
     test.py
 
-在 ``boto_ses.py`` 中, 我们有一个 ``BotoSessionFactory`` 类, 它有一个方法 ``get_workload_bsm``能获得指定的 environment 的 boto session 对象.
+在 ``boto_ses.py`` 中, 我们有一个 ``BotoSessionFactory`` 类, 它有一个方法 ``get_workload_bsm`` 能获得指定的 environment 的 boto session 对象.
 
 它还有一个 cached_property ``BotoSessionFactory.bsm``, 它一旦被调用过一次, 那它的值就再也不会被改变了. 这个对象是一个 shortcut, 用来获得最常用的 boto session 对象.
 
