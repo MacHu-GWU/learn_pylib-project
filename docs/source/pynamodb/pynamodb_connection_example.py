@@ -51,27 +51,49 @@ bsm2 = BotoSesManager(profile_name="bmt_app_dev_us_east_1", region_name="us-east
 # ------------------------------------------------------------------------------
 # This won't work
 # ------------------------------------------------------------------------------
-with bsm1.awscli():
-    Item.Meta.region = bsm1.aws_region
-    conn = Connection()
-    Item.create_table(wait=True)  # expect to create table in us-east-1
-
-with bsm2.awscli():
-    Item.Meta.region = bsm2.aws_region
-    conn = Connection()
-    Item.create_table(wait=True)  # expect to create table in us-east-2
+# with bsm1.awscli():
+#     Item.Meta.region = bsm1.aws_region
+#     conn = Connection()
+#     Item.create_table(wait=True)  # expect to create table in us-east-1
+#
+# with bsm2.awscli():
+#     Item.Meta.region = bsm2.aws_region
+#     conn = Connection()
+#     Item.create_table(wait=True)  # expect to create table in us-east-2
 
 # ------------------------------------------------------------------------------
 # This would work, but rely on the private attribute _connection
 # ------------------------------------------------------------------------------
-with bsm1.awscli():
-    Item._connection = None
-    Item.Meta.region = bsm1.aws_region
-    conn = Connection()
-    Item.create_table(wait=True)  # expect to create table in us-east-1
+# with bsm1.awscli():
+#     Item._connection = None
+#     Item.Meta.region = bsm1.aws_region
+#     conn = Connection()
+#     Item.create_table(wait=True)  # expect to create table in us-east-1
+#
+# with bsm2.awscli():
+#     Item._connection = None
+#     Item.Meta.region = bsm2.aws_region
+#     conn = Connection()
+#     Item.create_table(wait=True)  # expect to create table in us-east-2
 
-with bsm2.awscli():
-    Item._connection = None
-    Item.Meta.region = bsm2.aws_region
-    conn = Connection()
-    Item.create_table(wait=True)  # expect to create table in us-east-2
+# ------------------------------------------------------------------------------
+# 你的 default profile 是一个, 而你的 bsm 对象是另一个, 你希望 PynamoDB 的所有操作都用
+# 这个 bsm 对象的 session. 例如:
+# The default profile is bmt_app_devops_us_east_1, however, we want to use us-east-2
+#
+# 这种情况下你需要用 with bsm2.awscli(): 来重置所有 ORM class 的 _connection 属性
+# 然后运行一次 create_table() API 来触发 Table class 重新创建一个新的 Connection 对象.
+# 之后你就不需要 Context manager 了, 因为 Table class 会一直用这个新的 Connection 对象.
+#
+# 目前我还不知道为什么用 _get_connection() API 来触发 Table class 重新创建一个新的 Connection 对象.
+# 并不 work, 但是用 create_table() API 就 work 了. 这意味着每次启动程序都要检查一次 table
+# 存不存在, 这样会有性能浪费. 但是这是目前我找到的唯一的方法.
+# ------------------------------------------------------------------------------
+# with bsm2.awscli():
+#     Item._connection = None
+#     Item.Meta.region = bsm2.aws_region
+#     conn = Connection()
+#     Item.create_table(wait=True)  # expect to create table in us-east-2
+#
+# item = Item(key="foo", value=123)
+# item.save()
