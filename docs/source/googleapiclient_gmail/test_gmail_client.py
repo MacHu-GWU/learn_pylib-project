@@ -3,6 +3,7 @@
 import json
 from pathlib import Path
 
+import google.auth.exceptions
 from google.auth.transport.requests import Request
 from google.oauth2.credentials import Credentials
 from google_auth_oauthlib.flow import InstalledAppFlow
@@ -30,13 +31,19 @@ def auth():
     # The file token.json stores the user's access and refresh tokens, and is
     # created automatically when the authorization flow completes for the first
     # time.
-    if path_token:
+    if path_token.exists():
         creds = Credentials.from_authorized_user_file(str(path_token), SCOPES)
     # If there are no (valid) credentials available, let the user log in.
     if not creds or not creds.valid:
+        need_re_auth = True
         if creds and creds.expired and creds.refresh_token:
-            creds.refresh(Request())
-        else:
+            try:
+                creds.refresh(Request())
+                need_re_auth = False
+            except google.auth.exceptions.RefreshError as e:
+                pass
+
+        if need_re_auth:
             flow = InstalledAppFlow.from_client_secrets_file(
                 str(path_client_secrets),
                 SCOPES,
@@ -62,4 +69,4 @@ def get_thread_details(service, thread_id: str):
 if __name__ == "__main__":
     service = auth()
     list_threads(service)
-    get_thread_details(service, thread_id="18ec9466c9dc95e2")
+    # get_thread_details(service, thread_id="18ec9466c9dc95e2")
